@@ -471,7 +471,6 @@ void IF_stage(int *idx)
 			memset(&IF_ID,  0, sizeof(PiReg));//flush
 		}
 		else if(ID_tmp.Branch && ID_tmp.BranchTaken){
-			printf("$2: 0x%");
 
 			PC = (PC+4) + ID_tmp.SignImm * 4;
 			strcat(IF_str, " to_be_flushed");
