@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1430654524 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.cpp
+1431052650 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -8,7 +8,7 @@
 
 1430654631 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\parameter.h
 
-1430654660 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.h
+1431052643 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.h
 
 1430654424 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\instruction.cpp
 	<stdio.h>
@@ -20,9 +20,10 @@
 
 1430654583 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\instruction.h
 
-1431019072 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\main.cpp
+1431053050 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"parameter.h"
+	"error.h"
 

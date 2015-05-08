@@ -3,7 +3,7 @@
 #include <string.h>
 //#include "instruction.h"
 #include "parameter.h"
-//#include "error.h"
+#include "error.h"
 unsigned int imem[MEM_SIZE/4];
 unsigned int dmem[MEM_SIZE/4];
 unsigned int sp;
@@ -82,6 +82,7 @@ int main()
 		}
 		load_hazard = false;
 
+		cycle++;
 		//WB
 		unsigned int Result;
 		WB_stage();
@@ -109,7 +110,7 @@ int main()
             break;
         }
 
-		cycle++;
+
 
     }
 
@@ -144,7 +145,10 @@ void WB_stage(void)
 		WB_Result = MEM_WB.ALUOut;
 	}
 	if(MEM_WB.RegWrite) {
-		reg[writeReg] = WB_Result;
+		if(!is_nop(instr) &&  writeReg==0){
+			print_error(WRITE_ZERO, cycle);
+		}
+		else reg[writeReg] = WB_Result;
 	}
 }
 void DM_stage(void)
@@ -165,6 +169,9 @@ void DM_stage(void)
 	ALUOut = EX_MEM.ALUOut;
 	WriteData = EX_MEM.WriteData;
 	writeReg = EX_MEM.writeReg;
+
+	check_DM_errors(opcode, ALUOut);
+	if(error_halt) return;
 
 	if(EX_MEM.MemRead){
 		switch(opcode){ //TODO: overflow, misalign
@@ -248,7 +255,7 @@ void EX_stage(void)
 		default: puts("RegDst error!");
 	}
 
-	//Forward不包含branch, jump
+	//Forward不包含branch, jump  TODO: LUI擋掉!!
 	if(!ID_EX.Jump && !ID_EX.Branch){
 		//ForwardA
 		if( MEM_hazard(rs) ){
@@ -263,11 +270,11 @@ void EX_stage(void)
 			SrcA = ID_EX.RegData1;
 		}
 		//ForwardB
-		if( MEM_hazard(rt) ){
+		if( writeReg!=rt && MEM_hazard(rt) ){
 			WriteData = WB_Result;
 			sprintf(EX_str, "%s fwd_DM-WB_rt_$%d", EX_str,rt);
 		}
-		else if( EX_hazard(rt) ){
+		else if(writeReg!=rt && EX_hazard(rt) ){
 			WriteData = EX_tmp.ALUOut;
 			sprintf(EX_str, "%s fwd_EX-DM_rt_$%d", EX_str,rt);
 		}
@@ -278,8 +285,18 @@ void EX_stage(void)
 	}
 
 	switch(ID_EX.ALUOp) {
-		case ADD: EX_tmp.ALUOut = SrcA + SrcB; break;//TODO: overflow
-		case SUB: EX_tmp.ALUOut = SrcA - SrcB; break;//TODO: overflow
+		case ADD:
+			EX_tmp.ALUOut = SrcA + SrcB;
+			if(has_overflow(EX_tmp.ALUOut, SrcA, SrcB)){
+				print_error(NUMBER_OVERFLOW, cycle);
+			}
+				break;//TODO: overflow
+		case SUB:
+			EX_tmp.ALUOut = SrcA - SrcB;
+			if( has_overflow(EX_tmp.ALUOut,  SrcA, -SrcB) ){
+				print_error(NUMBER_OVERFLOW, cycle);
+			}
+				break;//TODO: overflow
 		case AND: EX_tmp.ALUOut = SrcA & SrcB; break;
 		case OR:  EX_tmp.ALUOut = SrcA | SrcB; break;
 		case XOR: EX_tmp.ALUOut = SrcA ^ SrcB; break;

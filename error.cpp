@@ -37,7 +37,28 @@ bool has_overflow(int c, int a, int b)
         return true;
     return false;
 }
+void check_DM_errors(int op, int addr)
+{
+    int unit;
+    if(op==LW || op==SW) unit = 4;
+    else if(op==LH || op==LHU || op==SH) unit = 2;
+    else unit = 1;
 
+    if(addr >= MEM_SIZE-3 || addr<0){
+        bool has_error = false;
+        if(addr<0 || unit==4 || (unit==2 && addr >= MEM_SIZE-1) || (unit==1 && addr>=MEM_SIZE))
+            has_error = true;
+        if(has_error){
+            print_error(ADDRESS_OVERFLOW, cycle);
+            error_halt = true;
+        }
+    }
+
+    if(addr%unit!=0){
+        print_error(MISALIGNMENT, cycle);
+        error_halt = true;
+    }
+}
 void check_errors(int rt, int addr, int reg_s, int sC, int op)
 {
     int unit;
