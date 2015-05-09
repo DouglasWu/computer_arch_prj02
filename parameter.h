@@ -34,7 +34,7 @@
 #define J 0x02
 #define JAL 0x03
 
-#define HALT 0xffffffff
+#define HALT 0x3F
 #define ZERO 0x00000000
 
 #define MEM_SIZE 1024
@@ -46,14 +46,39 @@
 extern unsigned int imem[MEM_SIZE/4];
 extern unsigned int dmem[MEM_SIZE/4];
 extern unsigned int sp;
-extern unsigned int iSize, dSize;
+extern int iSize, dSize;
 extern unsigned int reg[32];
 extern unsigned int PC, cycle;
-extern unsigned int PC_init;
-extern bool pcChanged;
 extern bool error_halt;
 extern FILE *snapshot;
 extern FILE *error_dump;
+
+//struct pipeline;
+//typedef struct pipeline PiReg;
+typedef struct pipeline{
+
+	bool Jump, Branch, BranchTaken; //ID
+
+	int ALUOp;
+	int RegDst;//0:rt  1:rd  2:31
+	bool ALUSrc;//EXE
+
+	bool MemRead, MemWrite; //MEM
+
+	bool RegWrite, MemtoReg; //WB
+
+	unsigned int instr;
+	unsigned int PCPlus4;
+	unsigned int rs, rt, rd, writeReg;
+	unsigned int RegData1, RegData2, shamt, SignImm;
+
+	unsigned int ALUOut;//from EX
+	unsigned int WriteData, ReadData;//for DM
+
+
+}PiReg;
+extern PiReg IF_ID, ID_EX, EX_MEM, MEM_WB;
+extern char IF_str[50], ID_str[50], EX_str[50], DM_str[50], WB_str[50];
 #endif
 
 

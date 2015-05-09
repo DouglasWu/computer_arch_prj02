@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1431052650 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.cpp
+1431078497 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"parameter.h"
 	"error.h"
 
-1430654631 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\parameter.h
+1431078860 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\parameter.h
 
-1431052643 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.h
+1431078492 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\error.h
 
 1430654424 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\instruction.cpp
 	<stdio.h>
@@ -20,10 +20,30 @@
 
 1430654583 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\instruction.h
 
-1431053050 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\main.cpp
+1431150418 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"parameter.h"
 	"error.h"
+	"load.h"
+	"output.h"
+
+1431081337 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\load.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"parameter.h"
+	"load.h"
+
+1431074052 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\load.h
+
+1431149320 c:\users\douglas\documents\nthu\計算機結構\project2\archi02\output.h
+
+1431150439 source:c:\users\douglas\documents\nthu\計算機結構\project2\archi02\output.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"parameter.h"
+	"output.h"
 
