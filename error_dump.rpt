@@ -1,18 +1,3 @@
-In cycle 6: Number Overflow
-In cycle 52: Write $0 Error
-In cycle 53: Write $0 Error
-In cycle 54: Write $0 Error
-In cycle 55: Write $0 Error
-In cycle 56: Write $0 Error
-In cycle 57: Write $0 Error
-In cycle 58: Write $0 Error
-In cycle 59: Write $0 Error
-In cycle 60: Write $0 Error
-In cycle 61: Write $0 Error
-In cycle 62: Write $0 Error
-In cycle 63: Write $0 Error
-In cycle 64: Write $0 Error
-In cycle 75: Number Overflow
-In cycle 174: Number Overflow
-In cycle 175: Address Overflow
-In cycle 175: Misalignment Error
+In cycle 8: Number Overflow
+In cycle 16: Number Overflow
+In cycle 17: Write $0 Error

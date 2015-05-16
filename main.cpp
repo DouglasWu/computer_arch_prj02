@@ -512,11 +512,17 @@ void branch_fwd_check(int rs, int rt)
 
 		if(EX_MEM.RegWrite && EX_MEM.writeReg!=0 ){
 			if(EX_MEM.writeReg==rs){
-				ID_tmp.RegData1 = EX_MEM.ALUOut;
-				sprintf(ID_str, "%s fwd_EX-DM_rs_$%d", ID_str,rs);
-			}
+				if( (EX_MEM.instr>>26)==JAL)
+                    ID_tmp.RegData1 = EX_MEM.PCPlus4;
+                else
+                    ID_tmp.RegData1 = EX_MEM.ALUOut;
+                    sprintf(ID_str, "%s fwd_EX-DM_rs_$%d", ID_str,rs);
+            }
 			if(EX_MEM.writeReg==rt){
-				ID_tmp.RegData2 = EX_MEM.ALUOut;
+				if( (EX_MEM.instr>>26)==JAL)
+                     ID_tmp.RegData2 = EX_MEM.PCPlus4;
+				else
+                    ID_tmp.RegData2 = EX_MEM.ALUOut;
 				sprintf(ID_str, "%s fwd_EX-DM_rt_$%d", ID_str,rt);
 			}
 		}

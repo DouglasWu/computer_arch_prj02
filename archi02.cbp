@@ -33,9 +33,11 @@
 		</Compiler>
 		<Unit filename="error.cpp" />
 		<Unit filename="error.h" />
-		<Unit filename="instruction.cpp" />
-		<Unit filename="instruction.h" />
+		<Unit filename="load.cpp" />
+		<Unit filename="load.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="output.cpp" />
+		<Unit filename="output.h" />
 		<Unit filename="parameter.h" />
 		<Extensions>
 			<code_completion />
